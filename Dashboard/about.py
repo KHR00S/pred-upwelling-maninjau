@@ -11,7 +11,7 @@ def app():
         st.title("Tentang Kami")
         st.header("Deskripsi Projek")
         st.markdown("""
-            Pembuatan dashboard ini merupakan salah satu luaran dari Pogram Kreativitas Mahasiswa – Riset Eksakta (PKM - RE) yang dikerjakan oleh Mahasiswa Universitas Syiah Kuala. Projek ini disusun untuk tujuan membantu Pembudidaya Keramba Jaring Apung (KJA) Danau Laut Tawar untuk mengambil Keputusan dalam membudidayakan ikan.
+            Pembuatan dashboard ini merupakan salah satu luaran dari Pogram Kreativitas Mahasiswa – Riset Eksakta (PKM - RE) yang dikerjakan oleh Mahasiswa Universitas Syiah Kuala. Projek ini disusun untuk tujuan membantu Pembudidaya Keramba Jaring Apung (KJA) Danau Maninjau untuk mengambil Keputusan dalam membudidayakan ikan.
         """)
         st.image('Artboard 1.png', use_column_width=True)
 
@@ -20,7 +20,7 @@ def app():
         with col_1:
             st.header("Visi")
             st.markdown("""
-            Menjadi penyedia solusi inovatif dalam mengatasi risiko upwelling dan memberikan informasi yang akurat untuk pengambilan keputusan oleh Pembudidaya KJA Danau Laut Tawar
+            Menjadi penyedia solusi inovatif dalam mengatasi risiko upwelling dan memberikan informasi yang akurat untuk pengambilan keputusan oleh Pembudidaya KJA Danau Maninjau
             """)
         with col_2:
             st.header("Misi")
@@ -33,17 +33,17 @@ def app():
         with col_3:
             st.header("Tujuan")
             st.markdown("""
-            1. Menyediakan sumber informasi yang terpercaya terkait risiko upwelling di danau laut tawar.
-            2. Meningkatkan kewaspadaan dan kesiapsiagaan pembudidaya KJA Danau Laut Tawar terhadap potensi risiko upwelling.
-            3. Mendukung upaya mitigasi dan penanggulangan risiko upwelling di danau laut tawar.
+            1. Menyediakan sumber informasi yang terpercaya terkait risiko upwelling di Danau Maninjau.
+            2. Meningkatkan kewaspadaan dan kesiapsiagaan pembudidaya KJA Danau Maninjau terhadap potensi risiko upwelling.
+            3. Mendukung upaya mitigasi dan penanggulangan risiko upwelling di Danau Maninjau.
             """)
 
         # Dataset Section
         st.header("Dataset yang Digunakan")
         st.markdown("""
             Kami menggunakan beberapa dataset dalam projek ini. Berikut adalah beberapa di antaranya:
-            1. Data Kejadian upwelling di Danau Laut Tawar
-            2. Data iklim Danau Laut Tawar   : [NASA Prediction Of Worldwide Energy Resources](https://power.larc.nasa.gov/)
+            1. Data Kejadian upwelling di Danau Maninjau
+            2. Data iklim Danau Maninjau   : [NASA Prediction Of Worldwide Energy Resources](https://power.larc.nasa.gov/)
         """)
 
         # Model Section
@@ -222,7 +222,7 @@ def app():
         st.title("About Us")
         st.header("Project Description")
         st.markdown("""
-            This dashboard is part of the output from the Program Kreatifitas Mahasiswa – Riset Eksakta (PKM - RE) conducted by students of Syiah Kuala University. This project is designed to help Floating Net Cage farmers in Danau Laut Tawar make decisions in fish farming.
+            This dashboard is part of the output from the Program Kreatifitas Mahasiswa – Riset Eksakta (PKM - RE) conducted by students of Syiah Kuala University. This project is designed to help Floating Net Cage farmers in Danau Maninjau make decisions in fish farming.
         """)
         st.image('Artboard 1.png', use_column_width=True)
 
@@ -231,7 +231,7 @@ def app():
         with col_1:
             st.header("Vision")
             st.markdown("""
-            To be an innovative solution provider in mitigating upwelling risks and providing accurate information for decision-making by Danau Laut Tawar KJA farmers.
+            To be an innovative solution provider in mitigating upwelling risks and providing accurate information for decision-making by Danau Maninjau KJA farmers.
             """)
         with col_2:
             st.header("Mission")
@@ -244,17 +244,17 @@ def app():
         with col_3:
             st.header("Goals")
             st.markdown("""
-            1. Provide a reliable source of information related to upwelling risks in Danau Laut Tawar.
-            2. Increase awareness and preparedness of Danau Laut Tawar KJA farmers against potential upwelling risks.
-            3. Support mitigation and countermeasures against upwelling risks in Danau Laut Tawar.
+            1. Provide a reliable source of information related to upwelling risks in Danau Maninjau.
+            2. Increase awareness and preparedness of Danau Maninjau KJA farmers against potential upwelling risks.
+            3. Support mitigation and countermeasures against upwelling risks in Danau Maninjau.
             """)
 
         # Dataset Section
         st.header("Datasets Used")
         st.markdown("""
             We use several datasets in this project. Here are some of them:
-            1. Upwelling events data in Danau Laut Tawar.
-            2. Danau Laut Tawar climate data   : [NASA Prediction Of Worldwide Energy Resources](https://power.larc.nasa.gov/)
+            1. Upwelling events data in Danau Maninjau.
+            2. Danau Maninjau climate data   : [NASA Prediction Of Worldwide Energy Resources](https://power.larc.nasa.gov/)
         """)
 
         # Model Section

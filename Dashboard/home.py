@@ -37,11 +37,11 @@ def app():
     lang = st.selectbox("Pilih Bahasa / Select Language", ["Bahasa Indonesia", "English"])
 
     if lang == "Bahasa Indonesia":
-        st.title("Dashboard Pemantauan dan Prediksi Upwelling Berbasis Indikator Iklim di Danau Laut Tawar")
+        st.title("Dashboard Pemantauan dan Prediksi Upwelling Berbasis Indikator Iklim di Danau Maninjau")
         st.markdown("""
-            Selamat datang di Dashboard Pemantauan dan Prediksi Upwelling berbasis indikator iklim Danau Laut Tawar!
-            Dengan menggabungkan data dalam setahun, potensi produksi ikan di Danau Laut Tawar dapat mencapai 196 ton. 
-            Namun, perubahan iklim yang tidak menentu mengganggu kestabilan produksi ikan di Danau Laut Tawar.
+            Selamat datang di Dashboard Pemantauan dan Prediksi Upwelling berbasis indikator iklim Danau Maninjau!
+            Dengan menggabungkan data dalam setahun, potensi produksi ikan di Danau Maninjau dapat mencapai 196 ton. 
+            Namun, perubahan iklim yang tidak menentu mengganggu kestabilan produksi ikan di Danau Maninjau.
         """)
         column_header = 'Deskripsi Kolom dari Tabel'
         tampilan_header = 'Tampilan Data Historis'
@@ -55,11 +55,11 @@ def app():
         7. Status       : Potensi Kejadian Upwelling
         """
     else:
-        st.title("Climate Indicator-Based Upwelling Monitoring and Prediction Dashboard in Danau Laut Tawar")
+        st.title("Climate Indicator-Based Upwelling Monitoring and Prediction Dashboard in Danau Maninjau")
         st.markdown("""
-            Welcome to the Lake Laut Tawar climate indicator-based Upwelling Monitoring and Prediction Dashboard!
-            By combining the data in a year, the potential fish production in Danau Laut Tawar can reach 196 tons.
-            However, erratic climate change is destabilizing fish production in Danau Laut Tawar.
+            Welcome to the Lake Maninjau climate indicator-based Upwelling Monitoring and Prediction Dashboard!
+            By combining the data in a year, the potential fish production in Danau Maninjau can reach 196 tons.
+            However, erratic climate change is destabilizing fish production in Danau Maninjau.
         """)
         column_header = 'Column descriptions of the table'
         tampilan_header = 'Historical Data Display'
