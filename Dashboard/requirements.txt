@@ -1,0 +1,13 @@
+numpy
+pandas
+seaborn
+statsmodels
+streamlit
+plotly
+joblib
+streamlit-option-menu
+keras
+st_social_media_links
+numpy
+scikit-learn
+datetime
