@@ -19,8 +19,6 @@ class MultiApp:
     def run(self):
         # Sidebar
         with st.sidebar:
-            # Add logo at the top of the sidebar
-            st.image(use_container_width=True)
 
             # Option menu
             app = option_menu(
