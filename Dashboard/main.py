@@ -20,7 +20,7 @@ class MultiApp:
         # Sidebar
         with st.sidebar:
             # Add logo at the top of the sidebar
-            st.image('pkmre-upwelling.png', use_column_width=True)
+            st.image(use_container_width=True)
 
             # Option menu
             app = option_menu(
@@ -40,7 +40,7 @@ class MultiApp:
             st.write('Created By:')
             st.image('usk.png')
                 
-            st.image('WhatsApp Image 2024-09-12 at 20.52.51_023c9d4d.png', use_column_width=True)
+            st.image('WhatsApp Image 2024-09-12 at 20.52.51_023c9d4d.png', use_container_width=True)
 
         # Main content
         if app == "Home":
