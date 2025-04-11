@@ -78,8 +78,8 @@ def app():
     df_table.set_index('DATE_STR', inplace=True)
 
     # Filter based on date range
-    min_date = pd.to_datetime("2017-01-01")
-    max_date = pd.to_datetime("2023-12-31")
+    min_date = pd.to_datetime("2020-01-01")
+    max_date = pd.to_datetime("2024-12-31")
     date_range = st.date_input("Pilih Rentang Waktu" if lang == "Bahasa Indonesia" else "Select Date Range", 
                                [min_date, max_date], 
                                min_value=min_date, max_value=max_date, key="date_range")
