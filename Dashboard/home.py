@@ -5,18 +5,14 @@ from web_function import preprocess_dataframe, load_data  # Assuming these are y
 
 # Descriptive names for the climate indicators in both languages
 indicator_names_en = {
-    'ALLSKY_KT': 'Sky Insolation Clarity Index',
-    'T2M': 'Average Air Temperature at 2 Meters Height (°C)',
+    'TS': 'Average Air Temperature at surace (°C)',
     'PRECTOTCORR': 'Rainfall (mm)',
-    'PS': 'Average Surface Pressure at the Earth\'s Surface (kPa)',
     'WS10M': 'Average Wind Speed at 10 Meters Height (m/s)'
 }
 
 indicator_names_id = {
-    'ALLSKY_KT': 'Indeks Kejernihan Langit',
-    'T2M': 'Suhu Udara Rata-Rata pada Ketinggian 2 Meter (°C)',
+    'TS': 'Suhu Udara Rata-Rata pada permukaan (°C)',
     'PRECTOTCORR': 'Curah Hujan (mm)',
-    'PS': 'Tekanan Permukaan Rata-Rata (kPa)',
     'WS10M': 'Kecepatan Angin Rata-Rata pada Ketinggian 10 Meter (m/s)'
 }
 
@@ -47,12 +43,10 @@ def app():
         tampilan_header = 'Tampilan Data Historis'
         column_description = """
         1. DATE         : Tanggal indikator iklim
-        2. ALLSKY_KT    : Indeks kejernihan insolasi langit
-        3. T2M          : Suhu udara rata-rata pada ketinggian 2 meter (°C)
-        4. PRECTOTCORR  : Curah hujan (mm)
-        5. PS           : Tekanan permukaan rata-rata (kPa)
-        6. WS10M        : Kecepatan angin rata-rata pada ketinggian 10 meter (m/s)
-        7. Status       : Potensi Kejadian Upwelling
+        2. TS           : Suhu udara rata-rata pada permukaan (°C)
+        3. PRECTOTCORR  : Curah hujan (mm)
+        4. WS10M        : Kecepatan angin rata-rata pada ketinggian 10 meter (m/s)
+        5. Status       : Potensi Kejadian Upwelling
         """
     else:
         st.title("Climate Indicator-Based Upwelling Monitoring and Prediction Dashboard in Danau Maninjau")
@@ -65,12 +59,10 @@ def app():
         tampilan_header = 'Historical Data Display'
         column_description = """
         1. DATE             : Date of the climate indicator
-        2. ALLSKY_KT        : Sky insolation clarity index
-        3. T2M              : Average air temperature at 2 meters height (°C)
+        3. TS               : Average air temperature at surface (°C)
         4. PRECTOTCORR      : Rainfall (mm)
-        5. PS               : Average surface pressure (kPa)
         6. WS10M            : Average wind speed at 10 meters height (m/s)
-        7. Status           : Potential Upwelling Event
+        7. Cluster          : Potential Upwelling Event
         """
 
     # Load Dataset
@@ -97,7 +89,7 @@ def app():
     df_plot = df_plot[(df_plot['DATE'] >= start_date) & (df_plot['DATE'] <= end_date)]
 
     # Display historical data
-    st.write(df_table[['ALLSKY_KT', 'T2M', 'PRECTOTCORR', 'PS', 'WS10M', 'Status']])
+    st.write(df_table[['TS', 'PRECTOTCORR', 'WS10M', 'Cluster']])
 
     # Column descriptions
     st.header(column_header)
