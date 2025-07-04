@@ -1,5 +1,5 @@
 import streamlit as st
-from st_social_media_links import SocialMediaIcons
+# from st_social_media_links import SocialMediaIcons  # Komentar karena tidak digunakan
 
 def app():
 
@@ -15,7 +15,7 @@ def app():
         """)
         st.image('Artboard 1.png', use_column_width=True)
 
-        # Visi, Misi, and Tujuan (Vision, Mission, and Goals)
+        # Visi, Misi, dan Tujuan
         col_1, col_2, col_3 = st.columns(3)
         with col_1:
             st.header("Visi")
@@ -38,7 +38,7 @@ def app():
             3. Mendukung upaya mitigasi dan penanggulangan risiko upwelling di Danau Maninjau.
             """)
 
-        # Dataset Section
+        # Dataset
         st.header("Dataset yang Digunakan")
         st.markdown("""
             Kami menggunakan beberapa dataset dalam projek ini. Berikut adalah beberapa di antaranya:
@@ -46,14 +46,14 @@ def app():
             2. Data iklim Danau Maninjau   : [NASA Prediction Of Worldwide Energy Resources](https://power.larc.nasa.gov/)
         """)
 
-        # Model Section
+        # Model
         st.header("Model yang Digunakan")
         st.markdown("""
-            ### Model Forecast ( Vector Autoregresive)
-            Kami menggunakan Vector Autoregresive untuk meramalkan indikator iklim pada berbagai interval waktu
+            ### Model Forecast (Vector Autoregressive)
+            Kami menggunakan Vector Autoregressive untuk meramalkan indikator iklim pada berbagai interval waktu
         """)
 
-        # Tools and Technologies
+        # Tools
         st.header("Teknologi / Tools yang Digunakan")
         st.markdown("""
             - **Streamlit**              : Untuk pembuatan antarmuka pengguna.
@@ -62,7 +62,7 @@ def app():
             - **Plotly Express**         : Library untuk membuat visualisasi data interaktif.
         """)
 
-        # Social Media
+        # Sosial Media
         st.header("Sosial Media")
         st.markdown("""
             <a href="https://www.instagram.com/pkmre_upwelling?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
@@ -77,19 +77,15 @@ def app():
             </a>
             """, unsafe_allow_html=True)
 
-        # Contact
+        # Kontak
         st.header("Kontak")
+        st.markdown("Jika Anda memiliki pertanyaan atau umpan balik, silakan hubungi kami:")
+        st.markdown("- ##### Fakhrus Syakir")
+        st.image('s.png')
         st.markdown("""
-            Jika Anda memiliki pertanyaan atau umpan balik, silakan hubungi kami:
+        - Email   : [fakhroosyakir@gmail.com](mailto:fakhroosyakir@gmail.com)  
+        - LinkedIn: [Fakhrus Syakir](https://www.linkedin.com/in/fakhrus-syakir-65bb72205/)
         """)
-            st.markdown("""
-                - ##### Fakhrus Syakir
-                """)
-            st.image('s.png')
-            st.markdown("""
-                    - Email   : [fakhroosyakir@gmail.com](mailto:fakhroosyakir@gmail.com) 
-                    - LinkedIn: [Fakhrus Syakir](https://www.linkedin.com/in/fakhrus-syakir-65bb72205/) 
-                    """)
 
     else:
         # English content
@@ -123,7 +119,7 @@ def app():
             3. Support mitigation and countermeasures against upwelling risks in Danau Maninjau.
             """)
 
-        # Dataset Section
+        # Dataset
         st.header("Datasets Used")
         st.markdown("""
             We use several datasets in this project. Here are some of them:
@@ -131,14 +127,14 @@ def app():
             2. Danau Maninjau climate data   : [NASA Prediction Of Worldwide Energy Resources](https://power.larc.nasa.gov/)
         """)
 
-        # Model Section
+        # Model
         st.header("Models Used")
         st.markdown("""
-            #### Forecas Vector Autoregressive)
-            We use Vector Autoregressive, to forecast climate indicators at various time intervals:
+            #### Forecast Model (Vector Autoregressive)
+            We use Vector Autoregressive to forecast climate indicators at various time intervals.
         """)
 
-        # Tools and Technologies
+        # Tools
         st.header("Technologies / Tools Used")
         st.markdown("""
             - **Streamlit**              : For building the user interface.
@@ -147,7 +143,7 @@ def app():
             - **Plotly Express**         : Libraries for creating interactive data visualizations.
         """)
 
-        # Social Media
+        # Sosial Media
         st.header("Sosial Media")
         st.markdown("""
             <a href="https://www.instagram.com/pkmre_upwelling?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
@@ -163,15 +159,11 @@ def app():
             """, unsafe_allow_html=True)
 
         # Contact
-        st.header("Kontak")
+        st.header("Contact")
+        st.markdown("If you have any questions or feedback, please contact us:")
+        st.markdown("- ##### Fakhrus Syakir")
+        st.image('s.png')
         st.markdown("""
-            If you have any questions or feedback, please contact us:
+        - Email   : [fakhroosyakir@gmail.com](mailto:fakhroosyakir@gmail.com)  
+        - LinkedIn: [Fakhrus Syakir](https://www.linkedin.com/in/fakhrus-syakir-65bb72205/)
         """)
-            st.markdown("""
-                - ##### Fakhrus Syakir
-                """)
-            st.image('s.png')
-            st.markdown("""
-                    - Email   : [fakhroosyakir@gmail.com](mailto:fakhroosyakir@gmail.com) 
-                    - LinkedIn: [Fakhrus Syakir](https://www.linkedin.com/in/fakhrus-syakir-65bb72205/) 
-                    """)
