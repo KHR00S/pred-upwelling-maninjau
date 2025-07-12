@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-from web_function import preprocess_dataframe, load_data  # Assuming these are your custom functions
+from web_function import preprocess_dataframe, load_data  # Pastikan fungsi ini tersedia dan benar
 
 # Descriptive names for the climate indicators in both languages
 indicator_names_en = {
-    'TS': 'Average Air Temperature at surace (°C)',
+    'TS': 'Average Air Temperature at surface (°C)',
     'PRECTOTCORR': 'Rainfall (mm)',
     'WS10M': 'Average Wind Speed at 10 Meters Height (m/s)'
 }
@@ -17,9 +17,7 @@ indicator_names_id = {
 }
 
 def plot_climate_indicator(df, indicator, lang):
-    # Select indicator name based on chosen language
     indicator_names = indicator_names_en if lang == "English" else indicator_names_id
-
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=df.index, y=df[indicator], mode='lines', name=indicator))
     fig.update_layout(title=indicator_names[indicator],
@@ -29,7 +27,6 @@ def plot_climate_indicator(df, indicator, lang):
     return fig
 
 def app():
-    # Set default language as "Bahasa Indonesia"
     lang = st.selectbox("Pilih Bahasa / Select Language", ["Bahasa Indonesia", "English"])
 
     if lang == "Bahasa Indonesia":
@@ -46,7 +43,7 @@ def app():
         2. TS           : Suhu udara rata-rata pada permukaan (°C)
         3. PRECTOTCORR  : Curah hujan (mm)
         4. WS10M        : Kecepatan angin rata-rata pada ketinggian 10 meter (m/s)
-        5. Status       : Potensi Kejadian Upwelling
+        5. Cluster      : Potensi Kejadian Upwelling
         """
     else:
         st.title("Climate Indicator-Based Upwelling Monitoring and Prediction Dashboard in Danau Maninjau")
@@ -58,26 +55,24 @@ def app():
         column_header = 'Column descriptions of the table'
         tampilan_header = 'Historical Data Display'
         column_description = """
-        1. DATE             : Date of the climate indicator
-        3. TS               : Average air temperature at surface (°C)
-        4. PRECTOTCORR      : Rainfall (mm)
-        6. WS10M            : Average wind speed at 10 meters height (m/s)
-        7. Cluster          : Potential Upwelling Event
+        1. DATE         : Date of the climate indicator
+        2. TS           : Average air temperature at surface (°C)
+        3. PRECTOTCORR  : Rainfall (mm)
+        4. WS10M        : Average wind speed at 10 meters height (m/s)
+        5. Cluster      : Potential Upwelling Event
         """
 
     # Load Dataset
     df = load_data("Dashboard/data/HASIL_CLUSTERING.csv")
     df['DATE'] = pd.to_datetime(df['DATE'])
-    
-    # Create two separate dataframes for table and plotting
+
+    # Untuk display tabel
     df_table = df.copy()
     df_plot = df.copy()
 
-    # Convert date to string for display in table
     df_table['DATE_STR'] = df_table['DATE'].dt.strftime('%d-%m-%Y')
     df_table.set_index('DATE_STR', inplace=True)
 
-    # Filter based on date range
     min_date = pd.to_datetime("2025-01-01")
     max_date = pd.to_datetime("2027-12-31")
     date_range = st.date_input("Pilih Rentang Waktu" if lang == "Bahasa Indonesia" else "Select Date Range", 
@@ -88,22 +83,22 @@ def app():
     df_table = df_table[(df_table['DATE'] >= start_date) & (df_table['DATE'] <= end_date)]
     df_plot = df_plot[(df_plot['DATE'] >= start_date) & (df_plot['DATE'] <= end_date)]
 
-    # Display historical data
+    # Display historical data table
     st.write(df_table[['TS', 'PRECTOTCORR', 'WS10M', 'Cluster']])
 
-    # Column descriptions
     st.header(column_header)
     st.text(column_description)
 
-    # Plot Upwelling Events vs Non-Upwelling Events with markers and specific colors
+    # Scatter plot PRECTOTCORR vs DATE with color based on Cluster
     st.header(tampilan_header)
     fig = go.Figure()
-
-    for status, color in zip(df_plot['Status'].unique(), ['red', 'green']):
-        filtered_df = df_plot[df_plot['Status'] == status]
-        fig.add_trace(go.Scatter(x=filtered_df['DATE'], y=filtered_df['PRECTOTCORR'],
-                                 mode='markers', marker=dict(color=color), name=status))
-
+    for status, color in zip(df_plot['Cluster'].unique(), ['red', 'green']):
+        filtered_df = df_plot[df_plot['Cluster'] == status]
+        fig.add_trace(go.Scatter(
+            x=filtered_df['DATE'], y=filtered_df['PRECTOTCORR'],
+            mode='markers', marker=dict(color=color),
+            name=status
+        ))
     fig.update_layout(title='Potential Upwelling vs Non-Upwelling Events' if lang == "English" 
                       else 'Potensi Upwelling vs Tidak Berpotensi Upwelling',
                       xaxis_title='Date' if lang == "English" else 'Tanggal',
@@ -111,44 +106,25 @@ def app():
                       template='plotly_dark')
     st.plotly_chart(fig, use_container_width=True)
 
-    # Climate Indicator Selection
+    # Indicator Plot Options (optional advanced visualization)
     st.header("Select Climate Indicators" if lang == "English" else "Pilih Indikator Iklim")
     with st.expander("Choose Climate Indicators to Display:" if lang == "English" else "Pilih Indikator Iklim yang Ingin Ditampilkan:"):
-        # Checkbox to select all indicators
         select_all = st.checkbox('Select All Indicators' if lang == "English" else 'Tampilkan Semua Indikator')
-        
-        # Set individual checkboxes depending on the "Select All" checkbox
-        allsky_kt = st.checkbox('ALLSKY_KT' if lang == "English" else 'ALLSKY_KT - Indeks Kejernihan Langit', value=select_all)
-        t2m = st.checkbox('T2M' if lang == "English" else 'T2M - Suhu Udara', value=select_all)
-        prectotcorr = st.checkbox('PRECTOTCORR' if lang == "English" else 'PRECTOTCORR - Curah Hujan', value=select_all)
-        ps = st.checkbox('PS' if lang == "English" else 'PS - Tekanan Permukaan', value=select_all)
-        ws10m = st.checkbox('WS10M' if lang == "English" else 'WS10M - Kecepatan Angin', value=select_all)
+        ts = st.checkbox('TS - Temperature' if lang == "English" else 'TS - Suhu', value=select_all)
+        prectotcorr = st.checkbox('PRECTOTCORR - Rainfall' if lang == "English" else 'PRECTOTCORR - Curah Hujan', value=select_all)
+        ws10m = st.checkbox('WS10M - Wind Speed' if lang == "English" else 'WS10M - Kecepatan Angin', value=select_all)
 
-    # Plot selected indicators
-    if allsky_kt:
-        fig_indicator = plot_climate_indicator(df_plot, 'ALLSKY_KT', lang)
+    if ts:
+        fig_indicator = plot_climate_indicator(df_plot.set_index('DATE'), 'TS', lang)
         st.plotly_chart(fig_indicator, use_container_width=True)
-        st.markdown('This graph displays the sky clarity index values from 2017 to 2024. This index measures how clear or bright the sky is, with values ranging from 0.1 (very cloudy) to 0.7 (very bright). Changes in this index show daily variations in sky clarity, which can be affected by factors such as clouds or pollution.' if lang == "English" else 'Grafik ini menampilkan nilai indeks kejernihan langit dari 2017 hingga 2024. Indeks ini mengukur seberapa jernih atau cerah langit, dengan nilai berkisar antara 0,1 (sangat keruh) hingga 0,7 (sangat cerah). Perubahan indeks ini menunjukkan variasi harian dalam kejernihan langit, yang bisa dipengaruhi oleh faktor-faktor seperti awan atau polusi.')
-
-    if t2m:
-        fig_indicator = plot_climate_indicator(df_plot, 'T2M', lang)
-        st.plotly_chart(fig_indicator, use_container_width=True)
-        st.markdown('This graph illustrates the change in average air temperature at 2 meters above ground level, over the period 2017 to 2024. Temperatures range from 17°C to 22°C. The graph shows a typical seasonal pattern, with regular increases and decreases in temperature over time.' if lang == "English" else 'Grafik ini menggambarkan perubahan suhu rata-rata udara di ketinggian 2 meter dari permukaan tanah, selama periode 2017 hingga 2024. Suhu berkisar antara 17°C hingga 22°C. Grafik ini menunjukkan pola musiman yang khas, dengan kenaikan dan penurunan suhu yang teratur seiring berjalannya waktu.')
 
     if prectotcorr:
-        fig_indicator = plot_climate_indicator(df_plot, 'PRECTOTCORR', lang)
+        fig_indicator = plot_climate_indicator(df_plot.set_index('DATE'), 'PRECTOTCORR', lang)
         st.plotly_chart(fig_indicator, use_container_width=True)
-        st.markdown('This graph shows the changes in rainfall amounts from 2017 to 2024. Rainfall amounts are measured in millimeters (mm), with considerable variation each year. Some periods show high rainfall, particularly at the end of the data in 2024, which may signal heavy rainfall events or an intense rainy season.' if lang == "English" else 'Grafik ini menunjukkan perubahan jumlah curah hujan dari tahun 2017 hingga 2024. Jumlah curah hujan diukur dalam milimeter (mm), dengan variasi yang cukup besar setiap tahunnya. Beberapa periode menunjukkan curah hujan yang tinggi, khususnya pada akhir data di tahun 2024, yang mungkin menandakan kejadian hujan lebat atau musim hujan intens.')
-
-    if ps:
-        fig_indicator = plot_climate_indicator(df_plot, 'PS', lang)
-        st.plotly_chart(fig_indicator, use_container_width=True)
-        st.markdown('This graph shows the average surface atmospheric pressure measured in kilopascals (kPa), from 2017 to 2024. The atmospheric pressure ranges from 87.6 to 88.2 kPa. The changes seen indicate variations in atmospheric pressure, which can be influenced by changes in weather or air pressure systems.' if lang == "English" else 'Grafik ini menunjukkan tekanan atmosfer permukaan rata-rata yang diukur dalam kilopascal (kPa), dari tahun 2017 hingga 2024. Tekanan atmosfer berkisar antara 87,6 hingga 88,2 kPa. Perubahan yang terlihat menunjukkan adanya variasi tekanan atmosfer, yang dapat dipengaruhi oleh perubahan cuaca atau sistem tekanan udara.')
 
     if ws10m:
-        fig_indicator = plot_climate_indicator(df_plot, 'WS10M', lang)
+        fig_indicator = plot_climate_indicator(df_plot.set_index('DATE'), 'WS10M', lang)
         st.plotly_chart(fig_indicator, use_container_width=True)
-        st.markdown('This graph shows the change in average wind speed at a height of 10 meters from the ground, from 2017 to 2024. Wind speeds range from 0.5 meters per second to 2.5 meters per second. The fluctuations in this graph show variations in wind speed, with some periods recording higher wind speeds.' if lang == "English" else 'Grafik ini memperlihatkan perubahan kecepatan angin rata-rata pada ketinggian 10 meter dari permukaan tanah, dari 2017 hingga 2024. Kecepatan angin berkisar antara 0,5 meter per detik hingga 2,5 meter per detik. Fluktuasi dalam grafik ini menunjukkan variasi dalam kecepatan angin, dengan beberapa periode yang mencatat kecepatan angin yang lebih tinggi.', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     app()
